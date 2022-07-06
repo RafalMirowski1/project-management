@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts :: header"></head>
+<nav th:replace="layouts :: projectnav"></nav>
+
+<body>
+<div class="container">
+    <h3> Projects Directory</h3>
+    <hr>
+    <a th:href="@{/projects/new}" class="btn btn-primary btn-sm mb-3">
+        New Project
+    </a>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>Project Name</th>
+            <th>Project Stage</th>
+            <th>Action</th>
+        </tr>
+
+        </thead>
+        <tbody>
+        <tr th:each="aProject : ${projectList}">
+            <td th:text="${aProject.name}"/>
+            <td th:text="${aProject.stage}"/>
+            <td>
+                <a th:href="@{/projects/update(id=${aProject.projectId})}"
+                   class="btn btn-info btn-sm">
+                    Update Project
+                </a>
+                <a th:href="@{/projects/delete(id=${aProject.projectId})}"
+                   class="btn btn-danger btn-sm"
+                   onClick="if (!(confirm('Are you sure you want to delete this project?'))) return False">
+
+                    Delete Project
+                </a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
